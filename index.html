@@ -710,11 +710,13 @@ function bustPlayer() {
     if (state.players[i].id === selectedPlayerId) { p = state.players[i]; break; }
   }
   if (!p) return;
-  var alreadyBust = 0;
+
+  // bustPosition = 現在のactive人数（= 残り人数、これがそのままこの人の順位）
+  var activeCount = 0;
   for (var j = 0; j < state.players.length; j++) {
-    if (state.players[j].status === 'bust') alreadyBust++;
+    if (state.players[j].status === 'active') activeCount++;
   }
-  p.bustPosition = totalPlayers() - alreadyBust;
+  p.bustPosition = activeCount; // 例: 残り3人の時にbust → 3位
   p.status = 'bust';
   saveState(); updateAll(); closeModal();
   showToast(p.name + ' busted in ' + p.bustPosition + ordinal(p.bustPosition) + ' place.');
@@ -727,6 +729,18 @@ function revivePlayer() {
     if (state.players[i].id === selectedPlayerId) { p = state.players[i]; break; }
   }
   if (!p) return;
+
+  var revivedPos = p.bustPosition;
+
+  // このプレイヤーより順位が高い（数値が小さい）bust済みプレイヤーの順位を1つ繰り下げる
+  // （復帰により、そのプレイヤーより後でbustした人が1つ後ろにずれる）
+  for (var k = 0; k < state.players.length; k++) {
+    var q = state.players[k];
+    if (q.status === 'bust' && q.id !== p.id && q.bustPosition <= revivedPos) {
+      q.bustPosition += 1;
+    }
+  }
+
   p.status = 'active';
   p.bustPosition = null;
   saveState(); updateAll(); closeModal();
@@ -735,7 +749,7 @@ function revivePlayer() {
 
 /* ---- Settings ---- */
 function resetTournament() {
-  document.getElementById('reset-confirm').style.display = '';
+  document.getElementById('reset-confirm').style.display = 'block';
 }
 
 function resetConfirmed() {
