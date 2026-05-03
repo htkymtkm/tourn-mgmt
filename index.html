@@ -1,531 +1,531 @@
 <!DOCTYPE html>
-<html lang="ja">
+
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>POKER TOURNAMENT</title>
+<title>Poker Tournament</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap');
 
-  :root {
-    --bg: #f2f4f0;
-    --surface: #ffffff;
-    --surface2: #f7f8f5;
-    --border: #dde3d8;
-    --green: #3a7d44;
-    --green-light: #eef5ef;
-    --green-mid: #c8dfc9;
-    --purple: #7c4daa;
-    --purple-light: #f3eefa;
-    --purple-mid: #d4b8f0;
-    --orange: #c0680a;
-    --orange-light: #fef3e8;
-    --orange-mid: #f5c990;
-    --red: #c0392b;
-    --bust: #9e9e9e;
-    --text: #1e2b1f;
-    --text-muted: #6b7c6d;
-    --text-light: #9eab9f;
-  }
+:root {
+–bg:           #f0f2ee;
+–surface:      #ffffff;
+–surface2:     #f6f7f4;
+–border:       #e0e5db;
+–green:        #2e7d44;
+–green-light:  #eaf3ec;
+–green-mid:    #b8d9be;
+–purple:       #6b3fa0;
+–purple-light: #f1ebfa;
+–purple-mid:   #c9aee8;
+–red:          #b53a2e;
+–amber:        #a06010;
+–bust-color:   #999999;
+–text:         #1a2a1c;
+–text-muted:   #627564;
+–text-light:   #9aab9c;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-    overflow-x: hidden;
-  }
+body {
+font-family: ‘Inter’, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+min-height: -webkit-fill-available;
+overflow-x: hidden;
+font-size: 14px;
+}
 
-  .header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 16px 12px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+/* Header */
+.header {
+background: var(–surface);
+border-bottom: 1px solid var(–border);
+padding: 10px 12px;
+position: sticky;
+top: 0;
+z-index: 100;
+display: flex;
+gap: 8px;
+}
 
-  .header-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 3px;
-    color: var(--green);
-  }
+.header-title { display: none; }
 
-  .header-stats { display: flex; gap: 8px; }
+.header-stats { display: flex; gap: 8px; width: 100%; }
 
-  .stat-badge {
-    background: var(--green-light);
-    border: 1px solid var(--green-mid);
-    border-radius: 10px;
-    padding: 4px 10px;
-    text-align: center;
-  }
+.stat-badge {
+background: var(–green-light);
+border: 1px solid var(–green-mid);
+border-radius: 8px;
+padding: 6px 4px;
+text-align: center;
+flex: 1;
+}
 
-  .stat-badge strong {
-    display: block;
-    font-size: 16px;
-    color: var(--green);
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 1px;
-  }
+.stat-badge strong {
+display: block;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 20px;
+color: var(–green);
+letter-spacing: 1px;
+line-height: 1.1;
+}
 
-  .stat-badge span { font-size: 10px; color: var(--text-muted); }
+.stat-badge span { font-size: 9px; color: var(–text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
-  .tabs {
-    display: flex;
-    background: var(--surface);
-    border-bottom: 2px solid var(--border);
-  }
+/* Tabs */
+.tabs {
+display: flex;
+background: var(–surface);
+border-bottom: 1px solid var(–border);
+}
 
-  .tab {
-    flex: 1;
-    padding: 12px 8px;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-align: center;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    transition: all 0.2s;
-  }
+.tab {
+flex: 1;
+padding: 11px 6px;
+font-size: 12px;
+font-weight: 700;
+color: var(–text-muted);
+text-align: center;
+cursor: pointer;
+border-bottom: 2px solid transparent;
+margin-bottom: -1px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+transition: color 0.15s, border-color 0.15s;
+}
 
-  .tab.active { color: var(--green); border-bottom-color: var(--green); }
+.tab.active { color: var(–green); border-bottom-color: var(–green); }
 
-  .content { padding: 16px; padding-bottom: 48px; }
+/* Content */
+.content { padding: 14px; padding-bottom: 48px; }
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px;
-    margin-bottom: 12px;
-  }
+/* Card */
+.card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 14px;
+margin-bottom: 12px;
+}
 
-  .card-title {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
+.card-title {
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–text-muted);
+margin-bottom: 12px;
+}
 
-  .input-group { display: flex; gap: 8px; margin-bottom: 10px; }
+/* Inputs */
+input[type=“text”], input[type=“number”] {
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 8px;
+color: var(–text);
+font-family: ‘Inter’, sans-serif;
+font-size: 14px;
+padding: 10px 12px;
+outline: none;
+width: 100%;
+appearance: none;
+-webkit-appearance: none;
+}
 
-  input[type="text"], input[type="number"], select {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--text);
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 14px;
-    padding: 10px 12px;
-    flex: 1;
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-  }
+input:focus { border-color: var(–green); box-shadow: 0 0 0 3px #2e7d4418; }
 
-  input:focus, select:focus { border-color: var(--green); box-shadow: 0 0 0 3px #3a7d4418; }
+.input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+.input-row input { flex: 1; }
 
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236b7c6d' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 30px;
-    background-color: var(--surface2);
-  }
+/* Buttons */
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+border: none;
+border-radius: 8px;
+font-family: ‘Inter’, sans-serif;
+font-weight: 700;
+font-size: 13px;
+padding: 10px 16px;
+cursor: pointer;
+transition: opacity 0.12s, transform 0.12s;
+white-space: nowrap;
+letter-spacing: 0.2px;
+}
 
-  .btn {
-    border: none;
-    border-radius: 10px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    padding: 10px 16px;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
+.btn:active { opacity: 0.78; transform: scale(0.97); }
+.btn-green  { background: var(–green); color: #fff; }
+.btn-red    { background: var(–red);   color: #fff; }
+.btn-amber  { background: var(–amber); color: #fff; }
+.btn-ghost  { background: var(–surface2); color: var(–text); border: 1px solid var(–border); }
+.btn-sm     { padding: 7px 12px; font-size: 12px; border-radius: 7px; }
+.btn-full   { width: 100%; }
 
-  .btn-green { background: var(--green); color: white; }
-  .btn-green:active { opacity: 0.85; transform: scale(0.97); }
-  .btn-red { background: var(--red); color: white; }
-  .btn-red:active { opacity: 0.85; }
-  .btn-orange { background: var(--orange); color: white; }
-  .btn-orange:active { opacity: 0.85; }
-  .btn-ghost { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
-  .btn-ghost:active { background: var(--border); }
-  .btn-outline-green { background: var(--green-light); color: var(--green); border: 1px solid var(--green-mid); }
-  .btn-sm { padding: 7px 12px; font-size: 12px; border-radius: 8px; }
-  .btn-full { width: 100%; }
+.btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
+.btn-row .btn { flex: 1; }
 
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
+/* Section label */
+.section-label {
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–text-light);
+margin-bottom: 8px;
+padding-bottom: 6px;
+border-bottom: 1px solid var(–border);
+}
 
-  /* Player list */
-  .player-list { display: flex; flex-direction: column; gap: 8px; }
+/* Player list */
+.player-list { display: flex; flex-direction: column; gap: 7px; }
 
-  .player-item {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 13px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-  }
+.player-item {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 10px;
+padding: 12px;
+display: flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+transition: background 0.1s;
+}
 
-  .player-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    border-radius: 4px 0 0 4px;
-  }
+.player-item:active { background: var(–surface2); }
 
-  .player-item.status-active::before { background: var(--green); }
-  .player-item.status-bust::before { background: var(--border); }
+.player-item::before {
+content: ‘’;
+position: absolute;
+left: 0; top: 0; bottom: 0;
+width: 3px;
+}
 
-  .player-rank {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    color: var(--text-light);
-    min-width: 26px;
-    text-align: center;
-  }
+.player-item.status-active::before { background: var(–green); }
+.player-item.status-bust::before   { background: var(–border); }
 
-  .player-info { flex: 1; min-width: 0; }
+.player-rank {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 17px;
+color: var(–text-light);
+min-width: 24px;
+text-align: center;
+flex-shrink: 0;
+}
 
-  .player-name {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--text);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+.player-info { flex: 1; min-width: 0; }
 
-  .player-meta {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 3px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-wrap: wrap;
-  }
+.player-name {
+font-weight: 700;
+font-size: 14px;
+color: var(–text);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
 
-  .ra-badge {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 1px 6px;
-    border-radius: 4px;
-    background: var(--purple-light);
-    color: var(--purple);
-    border: 1px solid var(--purple-mid);
-    letter-spacing: 0.3px;
-    flex-shrink: 0;
-  }
+.player-name.is-bust { color: var(–text-muted); }
 
-  .player-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-    flex-shrink: 0;
-  }
+.player-sub {
+font-size: 11px;
+color: var(–text-muted);
+margin-top: 2px;
+display: flex;
+align-items: center;
+gap: 5px;
+}
 
-  .status-badge {
-    font-size: 10px;
-    padding: 3px 9px;
-    border-radius: 20px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
+.ra-pill {
+display: inline-block;
+font-size: 10px;
+font-weight: 700;
+padding: 1px 6px;
+border-radius: 4px;
+background: var(–purple-light);
+color: var(–purple);
+border: 1px solid var(–purple-mid);
+letter-spacing: 0.2px;
+flex-shrink: 0;
+}
 
-  .status-active .status-badge { background: var(--green-light); color: var(--green); border: 1px solid var(--green-mid); }
-  .status-bust .status-badge { background: #f5f5f5; color: var(--bust); border: 1px solid #e0e0e0; }
+.player-right {
+flex-shrink: 0;
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: 3px;
+}
 
-  .bust-pos {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 15px;
-    color: var(--bust);
-    letter-spacing: 0.5px;
-  }
+.status-tag {
+font-size: 10px;
+font-weight: 700;
+padding: 2px 8px;
+border-radius: 20px;
+white-space: nowrap;
+}
 
-  /* Table view */
-  .tables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tag-active { background: var(–green-light); color: var(–green); border: 1px solid var(–green-mid); }
+.tag-bust   { background: #f4f4f4; color: var(–bust-color); border: 1px solid #ddd; }
 
-  .table-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 14px;
-    text-align: center;
-  }
+.bust-rank {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 14px;
+color: var(–bust-color);
+letter-spacing: 0.5px;
+}
 
-  .table-card-header {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    color: var(--green);
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-  }
+/* Modal */
+.modal-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: #00000050;
+z-index: 200;
+align-items: flex-end;
+justify-content: center;
+}
 
-  .table-count-label { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.modal-overlay.open { display: flex; }
 
-  .seat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.modal {
+background: var(–surface);
+border-radius: 16px 16px 0 0;
+border: 1px solid var(–border);
+border-bottom: none;
+padding: 18px 16px 40px;
+width: 100%;
+max-height: 88vh;
+overflow-y: auto;
+animation: slideUp 0.22s ease;
+box-shadow: 0 -6px 30px #00000018;
+}
 
-  .seat {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 4px;
-    text-align: center;
-    min-height: 42px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-  }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-  .seat.occupied { background: var(--green-light); border-color: var(--green-mid); }
-  .seat-num { font-size: 9px; color: var(--text-light); }
-  .seat-name { font-size: 10px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
+.modal-handle {
+width: 32px; height: 4px;
+background: var(–border);
+border-radius: 2px;
+margin: 0 auto 14px;
+}
 
-  /* Modal */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: #00000044;
-    z-index: 200;
-    align-items: flex-end;
-    justify-content: center;
-  }
-  .modal-overlay.open { display: flex; }
+.modal-player-name {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 22px;
+letter-spacing: 2px;
+color: var(–text);
+margin-bottom: 2px;
+}
 
-  .modal {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px 20px 0 0;
-    padding: 20px 16px 40px;
-    width: 100%;
-    max-height: 85vh;
-    overflow-y: auto;
-    animation: slideUp 0.25s ease;
-    box-shadow: 0 -4px 24px #0000001a;
-  }
+.modal-player-sub {
+font-size: 12px;
+color: var(–text-muted);
+margin-bottom: 16px;
+}
 
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+hr { border: none; border-top: 1px solid var(–border); margin: 14px 0; }
 
-  .modal-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 16px; }
-  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); letter-spacing: 2px; margin-bottom: 4px; }
-  .modal-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+/* R/A counter */
+.ra-control {
+background: var(–purple-light);
+border: 1px solid var(–purple-mid);
+border-radius: 10px;
+padding: 12px 14px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 8px;
+}
 
-  /* R/A toggle */
-  .ra-toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--purple-light);
-    border: 1px solid var(--purple-mid);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-  }
+.ra-control-label { font-weight: 700; font-size: 14px; color: var(–purple); }
+.ra-control-sub   { font-size: 11px; color: var(–text-muted); margin-top: 1px; }
 
-  .ra-toggle-left { display: flex; flex-direction: column; gap: 2px; }
-  .ra-toggle-label { font-weight: 700; font-size: 14px; color: var(--purple); }
-  .ra-toggle-sub { font-size: 11px; color: var(--text-muted); }
+.ra-counter { display: flex; align-items: center; gap: 10px; }
 
-  .ra-check {
-    width: 26px;
-    height: 26px;
-    border-radius: 7px;
-    border: 2px solid var(--purple-mid);
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    flex-shrink: 0;
-    transition: all 0.15s;
-  }
+.ra-btn {
+width: 32px; height: 32px;
+border-radius: 7px;
+border: 1px solid var(–purple-mid);
+background: var(–surface);
+color: var(–purple);
+font-size: 18px;
+font-weight: 700;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: background 0.12s;
+flex-shrink: 0;
+}
 
-  .ra-check.checked { background: var(--purple); border-color: var(--purple); color: white; }
+.ra-btn:active { background: var(–purple-mid); }
 
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--text);
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 13px;
-    font-weight: 700;
-    color: white;
-    z-index: 300;
-    transition: transform 0.3s ease;
-    white-space: nowrap;
-    box-shadow: 0 4px 16px #0000002a;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
+.ra-count-display {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 24px;
+color: var(–purple);
+min-width: 24px;
+text-align: center;
+letter-spacing: 1px;
+}
 
-  .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
-  .empty-state .icon { font-size: 36px; margin-bottom: 10px; }
-  .empty-state p { font-size: 13px; }
+/* Toast */
+.toast {
+position: fixed;
+bottom: 72px;
+left: 50%;
+transform: translateX(-50%) translateY(120px);
+background: var(–text);
+color: #fff;
+border-radius: 20px;
+padding: 9px 20px;
+font-size: 13px;
+font-weight: 600;
+z-index: 300;
+transition: transform 0.28s ease;
+white-space: nowrap;
+box-shadow: 0 4px 16px #00000030;
+pointer-events: none;
+}
 
-  hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
-  .row { display: flex; gap: 8px; margin-bottom: 10px; }
-  .row .btn { flex: 1; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 40px 20px; color: var(–text-light); }
+.empty-state .empty-icon {
+width: 40px; height: 40px;
+border: 2px solid var(–border);
+border-radius: 8px;
+margin: 0 auto 12px;
+display: flex; align-items: center; justify-content: center;
+}
+.empty-icon-inner { width: 16px; height: 16px; background: var(–border); border-radius: 2px; }
+.empty-state p { font-size: 13px; }
 </style>
+
 </head>
 <body>
 
+<!-- Header -->
+
 <div class="header">
-  <div class="header-title">♠ POKER TOURNAMENT</div>
   <div class="header-stats">
-    <div class="stat-badge"><strong id="hdr-active">0</strong><span>残り</span></div>
-    <div class="stat-badge"><strong id="hdr-total">0</strong><span>参加者</span></div>
-    <div class="stat-badge"><strong id="hdr-tables">0</strong><span>テーブル</span></div>
+    <div class="stat-badge">
+      <strong id="hdr-active">0</strong>
+      <span>Active</span>
+    </div>
+    <div class="stat-badge">
+      <strong id="hdr-entries">0</strong>
+      <span>Entries</span>
+    </div>
+    <div class="stat-badge">
+      <strong id="hdr-total">0</strong>
+      <span>Players</span>
+    </div>
   </div>
 </div>
 
+<!-- Tabs -->
+
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('players')">プレイヤー</div>
-  <div class="tab" onclick="switchTab('tables')">テーブル</div>
-  <div class="tab" onclick="switchTab('settings')">設定</div>
+  <div class="tab active" onclick="switchTab('players')">Players</div>
+  <div class="tab" onclick="switchTab('settings')">Settings</div>
 </div>
 
 <!-- Players Tab -->
-<div id="tab-players" class="content">
-  <div class="card">
-    <div class="card-title">プレイヤー登録</div>
-    <div class="input-group">
-      <input type="text" id="player-name-input" placeholder="名前を入力..." maxlength="12">
-      <button class="btn btn-green" onclick="addPlayer()">追加</button>
-    </div>
-    <div class="row">
-      <button class="btn btn-ghost btn-sm" onclick="autoAssignSeats()">🎲 席を自動割当</button>
-      <button class="btn btn-ghost btn-sm" onclick="openBulkAdd()">👥 まとめて追加</button>
-    </div>
-  </div>
-  <div class="section-label">参加者一覧 (<span id="player-count">0</span>名)</div>
-  <div id="player-list" class="player-list">
-    <div class="empty-state"><div class="icon">🃏</div><p>プレイヤーを追加してください</p></div>
-  </div>
-</div>
 
-<!-- Tables Tab -->
-<div id="tab-tables" class="content" style="display:none">
-  <div class="card">
-    <div class="card-title">テーブル管理</div>
-    <div class="row">
-      <input type="number" id="table-count-input" placeholder="テーブル数" min="1" max="10" value="2">
-      <button class="btn btn-green" onclick="setTables()">テーブル設定</button>
+<div id="tab-players" class="content">
+  <div class="section-label">Players (<span id="player-count">0</span>)</div>
+
+  <div id="player-list" class="player-list">
+    <div class="empty-state">
+      <div class="empty-icon"><div class="empty-icon-inner"></div></div>
+      <p>No players yet. Go to Settings to add players.</p>
     </div>
-  </div>
-  <div class="section-label">テーブル一覧</div>
-  <div id="tables-container">
-    <div class="empty-state"><div class="icon">🎰</div><p>テーブルを設定してください</p></div>
   </div>
 </div>
 
 <!-- Settings Tab -->
+
 <div id="tab-settings" class="content" style="display:none">
   <div class="card">
-    <div class="card-title">トーナメント設定</div>
-    <div class="section-label" style="margin-top:0">1テーブルの最大人数</div>
-    <div class="input-group">
-      <input type="number" id="max-seats" value="9" min="2" max="10">
+    <div class="card-title">Add Player</div>
+    <div class="input-row">
+      <input type="text" id="player-name-input" placeholder="Enter name..." maxlength="16">
+      <button class="btn btn-green" onclick="addPlayer()">Add</button>
     </div>
-    <button class="btn btn-green btn-full" onclick="saveSettings()">設定を保存</button>
+    <div class="btn-row">
+      <button class="btn btn-ghost btn-sm" onclick="openBulkAdd()">Bulk Add</button>
+    </div>
   </div>
+
   <div class="card">
-    <div class="card-title">データ管理</div>
-    <div class="row">
-      <button class="btn btn-ghost" onclick="resetTournament()">🔄 リセット</button>
-      <button class="btn btn-ghost" onclick="exportData()">📤 エクスポート</button>
+    <div class="card-title">Data</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="resetTournament()">Reset All</button>
+      <button class="btn btn-ghost" onclick="exportData()">Export</button>
     </div>
   </div>
 </div>
 
-<!-- Player Action Modal -->
+<!-- Player Modal -->
+
 <div class="modal-overlay" id="player-modal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-title" id="modal-player-name">プレイヤー</div>
-    <div class="modal-subtitle" id="modal-player-sub"></div>
+    <div class="modal-player-name" id="modal-player-name"></div>
+    <div class="modal-player-sub" id="modal-player-sub"></div>
 
-    <!-- R/A Toggle -->
-    <div class="ra-toggle-row" onclick="toggleRA()">
-      <div class="ra-toggle-left">
-        <div class="ra-toggle-label">R/A（リバイ・アドオン）</div>
-        <div class="ra-toggle-sub">タップしてオン・オフを切り替え</div>
-      </div>
-      <div class="ra-check" id="ra-check-box"></div>
-    </div>
+```
+<!-- R/A Counter -->
+<div class="ra-control">
+  <div>
+    <div class="ra-control-label">R/A (Rebuy / Add-on)</div>
+    <div class="ra-control-sub">Number of rebuys / add-ons</div>
+  </div>
+  <div class="ra-counter">
+    <button class="ra-btn" onclick="changeRA(-1)">−</button>
+    <div class="ra-count-display" id="ra-count-display">0</div>
+    <button class="ra-btn" onclick="changeRA(1)">+</button>
+  </div>
+</div>
 
-    <!-- bust player section (active only) -->
-    <div id="modal-active-section">
-      <hr>
-      <div class="section-label">テーブル / 席</div>
-      <div class="row">
-        <select id="modal-table-select"><option value="">テーブル選択</option></select>
-        <select id="modal-seat-select"><option value="">席選択</option></select>
-      </div>
-      <button class="btn btn-outline-green btn-full" onclick="assignSeat()" style="margin-bottom:8px">席を割当</button>
-      <hr>
-      <button class="btn btn-red btn-full" onclick="bustPlayer()" style="margin-bottom:8px">💀 バスト（脱落）</button>
-    </div>
+<!-- Active-only -->
+<div id="modal-active-section">
+  <hr>
+  <button class="btn btn-red btn-full" onclick="bustPlayer()">Mark as Bust</button>
+</div>
 
-    <!-- revive section (bust only) -->
-    <div id="modal-bust-section" style="display:none">
-      <hr>
-      <button class="btn btn-orange btn-full" onclick="revivePlayer()" style="margin-bottom:8px">🔄 復帰させる</button>
-    </div>
+<!-- Bust-only -->
+<div id="modal-bust-section" style="display:none">
+  <hr>
+  <button class="btn btn-amber btn-full" onclick="revivePlayer()">Revive Player</button>
+</div>
 
-    <button class="btn btn-ghost btn-full" onclick="closeModal()">閉じる</button>
+<hr>
+<button class="btn btn-ghost btn-full" onclick="closeModal()">Close</button>
+```
+
   </div>
 </div>
 
 <!-- Bulk Add Modal -->
+
 <div class="modal-overlay" id="bulk-modal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-title">まとめて追加</div>
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">名前を改行で区切って入力してください</p>
-    <textarea id="bulk-names" style="width:100%;height:130px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:14px;padding:10px;outline:none;resize:none" placeholder="山田太郎&#10;鈴木花子&#10;田中一郎"></textarea>
-    <div class="row" style="margin-top:10px">
-      <button class="btn btn-ghost" onclick="closeBulkModal()">キャンセル</button>
-      <button class="btn btn-green" onclick="bulkAddPlayers()">追加</button>
+    <div class="modal-player-name" style="margin-bottom:10px">Bulk Add</div>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">Enter one name per line.</p>
+    <textarea id="bulk-names" style="width:100%;height:130px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:14px;padding:10px;outline:none;resize:none;" placeholder="Alice&#10;Bob&#10;Charlie"></textarea>
+    <div class="btn-row" style="margin-top:10px">
+      <button class="btn btn-ghost" onclick="closeBulkModal()">Cancel</button>
+      <button class="btn btn-green" onclick="bulkAddPlayers()">Add</button>
     </div>
   </div>
 </div>
@@ -533,61 +533,75 @@
 <div class="toast" id="toast"></div>
 
 <script>
-let state = {
-  players: [],
-  tables: [],
-  settings: { maxSeats: 9 },
-};
+let state = { players: [] };
 let selectedPlayerId = null;
 let nextPlayerId = 1;
 
 function loadState() {
   try {
-    const saved = localStorage.getItem('poker_tournament_v5');
+    const saved = localStorage.getItem('poker_v7');
     if (saved) {
       const parsed = JSON.parse(saved);
-      state = { ...state, ...parsed };
-      nextPlayerId = state.players.length > 0 ? Math.max(...state.players.map(p => p.id)) + 1 : 1;
+      state = { players: [], ...parsed };
+      if (state.players.length > 0) {
+        nextPlayerId = Math.max(...state.players.map(p => p.id)) + 1;
+      }
     }
   } catch(e) {}
   updateAll();
 }
 
 function saveState() {
-  try { localStorage.setItem('poker_tournament_v5', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('poker_v7', JSON.stringify(state)); } catch(e) {}
 }
 
-// ---- 母数の計算: 参加人数 + R/Aチェック済み人数 ----
-function calcTotal() {
-  const playerCount = state.players.length;
-  const raCount = state.players.filter(p => p.ra).length;
-  return playerCount + raCount;
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// ---- Players ----
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+function ordinal(n) {
+  const s = ['th','st','nd','rd'], v = n % 100;
+  return s[(v - 20) % 10] || s[v] || s[0];
+}
+
+function totalPlayers() { return state.players.length; }
+
+// ---- Add Players ----
 function addPlayer() {
   const input = document.getElementById('player-name-input');
   const name = input.value.trim();
-  if (!name) { showToast('名前を入力してください'); return; }
-  state.players.push({ id: nextPlayerId++, name, status: 'active', table: null, seat: null, ra: false, bustPosition: null });
+  if (!name) { showToast('Please enter a name.'); return; }
+  state.players.push({ id: nextPlayerId++, name, status: 'active', ra: 0, bustPosition: null });
   input.value = '';
   saveState(); updateAll();
-  showToast(`${name} を追加しました`);
+  showToast(`${name} added.`);
 }
 
 function openBulkAdd() { document.getElementById('bulk-modal').classList.add('open'); }
 function closeBulkModal() { document.getElementById('bulk-modal').classList.remove('open'); }
 
 function bulkAddPlayers() {
-  const text = document.getElementById('bulk-names').value;
-  const names = text.split('\n').map(n => n.trim()).filter(n => n.length > 0);
-  if (!names.length) { showToast('名前を入力してください'); return; }
-  names.forEach(name => state.players.push({ id: nextPlayerId++, name, status: 'active', table: null, seat: null, ra: false, bustPosition: null }));
+  const names = document.getElementById('bulk-names').value
+    .split('\n').map(s => s.trim()).filter(s => s.length > 0);
+  if (!names.length) { showToast('Enter at least one name.'); return; }
+  names.forEach(name => {
+    state.players.push({ id: nextPlayerId++, name, status: 'active', ra: 0, bustPosition: null });
+  });
   document.getElementById('bulk-names').value = '';
-  closeBulkModal(); saveState(); updateAll();
-  showToast(`${names.length}名を追加しました`);
+  closeBulkModal();
+  saveState(); updateAll();
+  showToast(`${names.length} player${names.length > 1 ? 's' : ''} added.`);
 }
 
+// ---- Player Modal ----
 function openPlayerModal(id) {
   selectedPlayerId = id;
   const p = state.players.find(x => x.id === id);
@@ -595,99 +609,41 @@ function openPlayerModal(id) {
 
   document.getElementById('modal-player-name').textContent = p.name;
 
-  // サブタイトル
   const isBust = p.status === 'bust';
-  const sub = isBust
-    ? `脱落 — ${p.bustPosition}位 / ${calcTotal()}人中`
-    : (p.table !== null ? `T${p.table+1} / ${p.seat}番席` : '未割当');
-  document.getElementById('modal-player-sub').textContent = sub;
+  document.getElementById('modal-player-sub').textContent = isBust
+    ? `Busted — ${p.bustPosition}${ordinal(p.bustPosition)} place / ${totalPlayers()} players`
+    : 'Active';
 
-  // R/A checkbox (both active and bust can toggle)
-  const box = document.getElementById('ra-check-box');
-  box.textContent = p.ra ? '✓' : '';
-  box.classList.toggle('checked', !!p.ra);
-
-  // セクション切り替え
+  document.getElementById('ra-count-display').textContent = p.ra || 0;
   document.getElementById('modal-active-section').style.display = isBust ? 'none' : '';
-  document.getElementById('modal-bust-section').style.display = isBust ? '' : 'none';
-
-  if (!isBust) {
-    // Table select
-    const ts = document.getElementById('modal-table-select');
-    ts.innerHTML = '<option value="">テーブル選択</option>';
-    state.tables.forEach((_, i) => {
-      ts.innerHTML += `<option value="${i}" ${p.table === i ? 'selected' : ''}>テーブル ${i+1}</option>`;
-    });
-    updateSeatSelect(p.table !== null ? p.table : '');
-    if (p.table !== null) {
-      ts.value = p.table;
-      document.getElementById('modal-seat-select').value = p.seat !== null ? p.seat : '';
-    }
-  }
+  document.getElementById('modal-bust-section').style.display   = isBust ? '' : 'none';
 
   document.getElementById('player-modal').classList.add('open');
 }
 
-function closeModal() { document.getElementById('player-modal').classList.remove('open'); selectedPlayerId = null; }
+function closeModal() {
+  document.getElementById('player-modal').classList.remove('open');
+  selectedPlayerId = null;
+}
 
-function toggleRA() {
+// ---- R/A ----
+function changeRA(delta) {
   if (!selectedPlayerId) return;
   const p = state.players.find(x => x.id === selectedPlayerId);
-  p.ra = !p.ra;
-  const box = document.getElementById('ra-check-box');
-  box.textContent = p.ra ? '✓' : '';
-  box.classList.toggle('checked', p.ra);
-  // サブタイトル更新
-  if (p.status === 'bust') {
-    document.getElementById('modal-player-sub').textContent = `脱落 — ${p.bustPosition}位 / ${calcTotal()}人中`;
-  }
+  p.ra = Math.max(0, (p.ra || 0) + delta);
+  document.getElementById('ra-count-display').textContent = p.ra;
   saveState(); updateAll();
 }
 
-document.getElementById('modal-table-select').addEventListener('change', function() {
-  updateSeatSelect(this.value !== '' ? parseInt(this.value) : '');
-});
-
-function updateSeatSelect(tableIdx) {
-  const ss = document.getElementById('modal-seat-select');
-  ss.innerHTML = '<option value="">席選択</option>';
-  if (tableIdx === '' || tableIdx === null || tableIdx === undefined) return;
-  const occupied = state.players
-    .filter(p => p.table === parseInt(tableIdx) && p.id !== selectedPlayerId)
-    .map(p => p.seat);
-  for (let s = 1; s <= state.settings.maxSeats; s++) {
-    const taken = occupied.includes(s);
-    ss.innerHTML += `<option value="${s}" ${taken ? 'disabled' : ''}>${s}番席${taken ? ' (使用中)' : ''}</option>`;
-  }
-}
-
-function assignSeat() {
-  if (!selectedPlayerId) return;
-  const tVal = document.getElementById('modal-table-select').value;
-  const sVal = document.getElementById('modal-seat-select').value;
-  const p = state.players.find(x => x.id === selectedPlayerId);
-  if (tVal !== '' && sVal !== '') {
-    p.table = parseInt(tVal); p.seat = parseInt(sVal);
-    showToast(`テーブル${p.table+1} / ${p.seat}番席に割当`);
-  } else if (tVal === '') {
-    p.table = null; p.seat = null;
-    showToast('席の割当を解除しました');
-  } else { showToast('席を選択してください'); return; }
-  saveState(); updateAll(); closeModal();
-}
-
+// ---- Bust / Revive ----
 function bustPlayer() {
   if (!selectedPlayerId) return;
   const p = state.players.find(x => x.id === selectedPlayerId);
-  // 現在バスト済みの人数 = 何人目の脱落か
   const alreadyBust = state.players.filter(x => x.status === 'bust').length;
-  // 順位 = 母数 - alreadyBust (最後にバストした人ほど上位)
-  const total = calcTotal();
-  p.bustPosition = total - alreadyBust;
+  p.bustPosition = totalPlayers() - alreadyBust;
   p.status = 'bust';
-  p.table = null; p.seat = null;
   saveState(); updateAll(); closeModal();
-  showToast(`${p.name} が${p.bustPosition}位で脱落しました`);
+  showToast(`${p.name} busted in ${p.bustPosition}${ordinal(p.bustPosition)} place.`);
 }
 
 function revivePlayer() {
@@ -696,115 +652,101 @@ function revivePlayer() {
   p.status = 'active';
   p.bustPosition = null;
   saveState(); updateAll(); closeModal();
-  showToast(`${p.name} が復帰しました`);
-}
-
-function autoAssignSeats() {
-  if (!state.tables.length) { showToast('先にテーブルを設定してください'); return; }
-  const active = state.players.filter(p => p.status !== 'bust');
-  active.forEach(p => { p.table = null; p.seat = null; });
-  const shuffled = [...active].sort(() => Math.random() - 0.5);
-  let tIdx = 0, sIdx = 1;
-  shuffled.forEach(p => {
-    if (tIdx >= state.tables.length) return;
-    p.table = tIdx; p.seat = sIdx++;
-    if (sIdx > state.settings.maxSeats) { sIdx = 1; tIdx++; }
-  });
-  saveState(); updateAll();
-  showToast('席を自動割当しました');
-}
-
-// ---- Tables ----
-function setTables() {
-  const n = Math.min(Math.max(parseInt(document.getElementById('table-count-input').value) || 1, 1), 10);
-  while (state.tables.length < n) state.tables.push({});
-  state.tables = state.tables.slice(0, n);
-  state.players.forEach(p => { if (p.table !== null && p.table >= n) { p.table = null; p.seat = null; } });
-  saveState(); updateAll();
-  showToast(`${n}テーブルを設定しました`);
+  showToast(`${p.name} has been revived.`);
 }
 
 // ---- Settings ----
-function saveSettings() {
-  state.settings.maxSeats = parseInt(document.getElementById('max-seats').value) || 9;
-  saveState(); updateAll();
-  showToast('設定を保存しました');
-}
-
 function resetTournament() {
-  if (!confirm('トーナメントをリセットしますか？\n全データが消えます。')) return;
-  state.players = []; state.tables = []; nextPlayerId = 1;
+  if (!confirm('Reset the entire tournament? All data will be lost.')) return;
+  state.players = [];
+  nextPlayerId = 1;
   saveState(); updateAll();
-  showToast('リセットしました');
+  showToast('Tournament reset.');
 }
 
 function exportData() {
-  const total = calcTotal();
+  const total = totalPlayers();
   const active = state.players.filter(p => p.status !== 'bust');
-  const bust = state.players.filter(p => p.status === 'bust').sort((a,b) => a.bustPosition - b.bustPosition);
-  let text = `=== POKER TOURNAMENT ===\n${new Date().toLocaleString('ja-JP')}\n母数: ${total}人 (参加${state.players.length}名 + R/A ${state.players.filter(p=>p.ra).length}回)\n\n`;
-  text += `【残りプレイヤー ${active.length}名】\n`;
+  const bust = state.players.filter(p => p.status === 'bust')
+    .sort((a, b) => a.bustPosition - b.bustPosition);
+
+  let text = `=== POKER TOURNAMENT ===\n${new Date().toLocaleString('en')}\n\n`;
+  text += `[Active — ${active.length} players]\n`;
   active.forEach((p, i) => {
-    const seat = p.table !== null ? `T${p.table+1}/${p.seat}番` : '未割当';
-    text += `${i+1}. ${p.name} (${seat})${p.ra ? ' [R/A]' : ''}\n`;
+    text += `${i + 1}. ${p.name}${p.ra > 0 ? ` (R/A x${p.ra})` : ''}\n`;
   });
-  text += `\n【脱落 ${bust.length}名】\n`;
-  bust.forEach(p => { text += `${p.bustPosition}位 / ${total}人. ${p.name}\n`; });
-  if (navigator.share) navigator.share({ title: 'Tournament Data', text });
+  text += `\n[Busted — ${bust.length} players]\n`;
+  bust.forEach(p => {
+    text += `${p.bustPosition}/${total}  ${p.name}${p.ra > 0 ? ` (R/A x${p.ra})` : ''}\n`;
+  });
+
+  if (navigator.share) navigator.share({ title: 'Tournament Results', text });
   else alert(text);
 }
 
 // ---- Render ----
 function updateAll() {
   renderPlayers();
-  renderTables();
   updateHeader();
-  document.getElementById('max-seats').value = state.settings.maxSeats;
 }
 
 function updateHeader() {
   const active = state.players.filter(p => p.status !== 'bust').length;
+  const entries = state.players.reduce((sum, p) => sum + 1 + (p.ra || 0), 0);
   document.getElementById('hdr-active').textContent = active;
+  document.getElementById('hdr-entries').textContent = entries;
   document.getElementById('hdr-total').textContent = state.players.length;
-  document.getElementById('hdr-tables').textContent = state.tables.length;
   document.getElementById('player-count').textContent = state.players.length;
 }
 
 function renderPlayers() {
   const list = document.getElementById('player-list');
   if (!state.players.length) {
-    list.innerHTML = '<div class="empty-state"><div class="icon">🃏</div><p>プレイヤーを追加してください</p></div>';
+    list.innerHTML = `<div class="empty-state">
+      <div class="empty-icon"><div class="empty-icon-inner"></div></div>
+      <p>No players yet. Go to Settings to add players.</p>
+    </div>`;
     return;
   }
-  const total = calcTotal();
+
+  const total = totalPlayers();
   const active = state.players.filter(p => p.status !== 'bust');
-  const bust = state.players.filter(p => p.status === 'bust').sort((a,b) => b.bustPosition - a.bustPosition);
+  const bust = state.players.filter(p => p.status === 'bust')
+    .sort((a, b) => a.bustPosition - b.bustPosition);
+
   let html = '';
 
   active.forEach((p, i) => {
-    const seat = p.table !== null ? `T${p.table+1} / ${p.seat}番席` : '未割当';
+    const raPills = p.ra > 0
+      ? Array(p.ra).fill('<span class="ra-pill">R/A</span>').join('')
+      : '';
     html += `<div class="player-item status-active" onclick="openPlayerModal(${p.id})">
-      <div class="player-rank">${i+1}</div>
+      <div class="player-rank">${i + 1}</div>
       <div class="player-info">
         <div class="player-name">${escHtml(p.name)}</div>
-        <div class="player-meta">${seat}${p.ra ? `&ensp;<span class="ra-badge">R/A</span>` : ''}</div>
+        <div class="player-sub">Active${raPills ? '&ensp;' + raPills : ''}</div>
       </div>
       <div class="player-right">
-        <span class="status-badge">プレイ中</span>
+        <span class="status-tag tag-active">Playing</span>
       </div>
     </div>`;
   });
 
-  if (bust.length) {
-    html += `<div class="section-label" style="margin-top:14px">脱落 (${bust.length}名)</div>`;
+  if (bust.length > 0) {
+    html += `<div class="section-label" style="margin-top:14px">Busted (${bust.length})</div>`;
     bust.forEach(p => {
+      const raPills = p.ra > 0
+        ? Array(p.ra).fill('<span class="ra-pill" style="opacity:0.6">R/A</span>').join('')
+        : '';
       html += `<div class="player-item status-bust" onclick="openPlayerModal(${p.id})">
-        <div class="player-rank" style="color:#ccc">✕</div>
+        <div class="player-rank" style="color:#ccc;font-size:12px">—</div>
         <div class="player-info">
-          <div class="player-name" style="color:var(--text-muted)">${escHtml(p.name)}${p.ra ? `&ensp;<span class="ra-badge" style="opacity:0.6">R/A</span>` : ''}</div>
+          <div class="player-name is-bust">${escHtml(p.name)}</div>
+          <div class="player-sub">Busted${raPills ? '&ensp;' + raPills : ''}</div>
         </div>
         <div class="player-right">
-          <div class="bust-pos">${p.bustPosition}位 / ${total}人</div>
+          <div class="bust-rank">${p.bustPosition} / ${total}</div>
+          <span class="status-tag tag-bust">Bust</span>
         </div>
       </div>`;
     });
@@ -813,55 +755,27 @@ function renderPlayers() {
   list.innerHTML = html;
 }
 
-function renderTables() {
-  const container = document.getElementById('tables-container');
-  if (!state.tables.length) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">🎰</div><p>テーブルを設定してください</p></div>';
-    return;
-  }
-  let html = '<div class="tables-grid">';
-  state.tables.forEach((t, ti) => {
-    const seated = state.players.filter(p => p.table === ti && p.status !== 'bust');
-    html += `<div class="table-card">
-      <div class="table-card-header">TABLE ${ti+1}</div>
-      <div class="table-count-label">${seated.length} / ${state.settings.maxSeats}名</div>
-      <div class="seat-grid">`;
-    for (let s = 1; s <= Math.min(state.settings.maxSeats, 9); s++) {
-      const player = seated.find(p => p.seat === s);
-      html += `<div class="seat ${player ? 'occupied' : ''}">
-        <div class="seat-num">${s}</div>
-        <div class="seat-name">${player ? escHtml(player.name.substring(0,5)) : '−'}</div>
-      </div>`;
-    }
-    html += `</div></div>`;
-  });
-  html += '</div>';
-  container.innerHTML = html;
-}
-
+// ---- Tabs ----
+const TAB_NAMES = ['players', 'settings'];
 function switchTab(name) {
-  ['players','tables','settings'].forEach((t, i) => {
+  TAB_NAMES.forEach((t, i) => {
     document.getElementById(`tab-${t}`).style.display = t === name ? '' : 'none';
     document.querySelectorAll('.tab')[i].classList.toggle('active', t === name);
   });
 }
 
-function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function showToast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2200);
-}
-
+// ---- Modal overlay close ----
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
   overlay.addEventListener('click', e => {
-    if (e.target === overlay) { overlay.classList.remove('open'); selectedPlayerId = null; }
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+      selectedPlayerId = null;
+    }
   });
 });
 
 loadState();
 </script>
+
 </body>
 </html>
