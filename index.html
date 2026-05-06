@@ -520,7 +520,18 @@ justify-content: center;
   </div>
 
   <div class="card">
-    <div class="card-title">Data</div>
+    <div class="card-title" onclick="toggleRemovePanel()" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;">
+      <span>Remove Player</span>
+      <span id="remove-chevron" style="font-size:12px;color:#9aab9c;transition:transform 0.2s;">▼</span>
+    </div>
+    <div id="remove-player-panel" style="display:none;margin-top:12px;">
+      <div id="remove-player-list">
+        <p style="font-size:13px;color:#9aab9c;font-family:'Inter',sans-serif;">No players added yet.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
     <div class="btn-row">
       <button class="btn btn-ghost" onclick="resetTournament()">Reset All</button>
       <button class="btn btn-ghost" onclick="exportData()">Export</button>
@@ -638,7 +649,14 @@ function addPlayer() {
   var input = document.getElementById('player-name-input');
   var name = input.value.trim();
   if (!name) { showToast('Please enter a name.'); return; }
-  state.players.push({ id: nextPlayerId++, name: name, status: 'active', ra: 0, bustPosition: null });
+  // 既存のbust済みプレイヤーの分子・分母を+1
+  for (var i = 0; i < state.players.length; i++) {
+    if (state.players[i].status === 'bust') {
+      state.players[i].bustPosition += 1;
+      state.players[i].bustTotal += 1;
+    }
+  }
+  state.players.push({ id: nextPlayerId++, name: name, status: 'active', ra: 0, bustPosition: null, bustTotal: null });
   input.value = '';
   saveState(); updateAll();
   showToast(name + ' added.');
@@ -655,8 +673,16 @@ function bulkAddPlayers() {
     if (n.length > 0) names.push(n);
   }
   if (!names.length) { showToast('Enter at least one name.'); return; }
+  // 既存のbust済みプレイヤーの分子・分母を追加人数分+する
+  var addCount = names.length;
+  for (var k = 0; k < state.players.length; k++) {
+    if (state.players[k].status === 'bust') {
+      state.players[k].bustPosition += addCount;
+      state.players[k].bustTotal += addCount;
+    }
+  }
   for (var j = 0; j < names.length; j++) {
-    state.players.push({ id: nextPlayerId++, name: names[j], status: 'active', ra: 0, bustPosition: null });
+    state.players.push({ id: nextPlayerId++, name: names[j], status: 'active', ra: 0, bustPosition: null, bustTotal: null });
   }
   document.getElementById('bulk-names').value = '';
   closeBulkModal();
@@ -711,12 +737,12 @@ function bustPlayer() {
   }
   if (!p) return;
 
-  // bustPosition = 現在のactive人数（= 残り人数、これがそのままこの人の順位）
   var activeCount = 0;
   for (var j = 0; j < state.players.length; j++) {
     if (state.players[j].status === 'active') activeCount++;
   }
-  p.bustPosition = activeCount; // 例: 残り3人の時にbust → 3位
+  p.bustPosition = activeCount;
+  p.bustTotal = state.players.length; // bust時点の総人数を記録
   p.status = 'bust';
   saveState(); updateAll(); closeModal();
   showToast(p.name + ' busted in ' + p.bustPosition + ordinal(p.bustPosition) + ' place.');
@@ -732,17 +758,18 @@ function revivePlayer() {
 
   var revivedPos = p.bustPosition;
 
-  // このプレイヤーより順位が高い（数値が小さい）bust済みプレイヤーの順位を1つ繰り下げる
-  // （復帰により、そのプレイヤーより後でbustした人が1つ後ろにずれる）
   for (var k = 0; k < state.players.length; k++) {
     var q = state.players[k];
     if (q.status === 'bust' && q.id !== p.id && q.bustPosition <= revivedPos) {
       q.bustPosition += 1;
+      // bustTotalも1減らす（復帰により当時の人数が1人分減ったとみなす）
+      if (q.bustTotal > 0) q.bustTotal -= 1;
     }
   }
 
   p.status = 'active';
   p.bustPosition = null;
+  p.bustTotal = null;
   saveState(); updateAll(); closeModal();
   showToast(p.name + ' has been revived.');
 }
@@ -816,6 +843,7 @@ function fallbackCopy(text) {
 /* ---- Render ---- */
 function updateAll() {
   renderPlayers();
+  renderRemovePlayers();
   updateHeader();
 }
 
@@ -875,7 +903,7 @@ function renderPlayers() {
           + '<div class="player-sub">Busted' + (raPillsBust ? '&ensp;' + raPillsBust : '') + '</div>'
         + '</div>'
         + '<div class="player-right">'
-          + '<div class="bust-rank">' + bp.bustPosition + ' / ' + total + '</div>'
+          + '<div class="bust-rank">' + bp.bustPosition + ' / ' + (bp.bustTotal || totalPlayers()) + '</div>'
           + '<span class="status-tag tag-bust">Bust</span>'
         + '</div>'
         + '</div>';
@@ -883,6 +911,73 @@ function renderPlayers() {
   }
 
   list.innerHTML = html;
+}
+
+function toggleRemovePanel() {
+  var panel = document.getElementById('remove-player-panel');
+  var chevron = document.getElementById('remove-chevron');
+  var open = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : '';
+  chevron.style.transform = open ? '' : 'rotate(180deg)';
+}
+
+function renderRemovePlayers() {
+  var el = document.getElementById('remove-player-list');
+  if (!el) return;
+  if (!state.players.length) {
+    el.innerHTML = '<p style="font-size:13px;color:#9aab9c;font-family:\'Inter\',sans-serif;">No players added yet.</p>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < state.players.length; i++) {
+    var p = state.players[i];
+    var dot = p.status === 'bust' ? '#cccccc' : '#2e7d44';
+    html += '<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #e0e5db;">'
+      + '<div style="width:8px;height:8px;border-radius:50%;background:' + dot + ';flex-shrink:0;"></div>'
+      + '<div style="flex:1;font-size:14px;font-weight:600;color:#1a2a1c;font-family:\'Inter\',sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + escHtml(p.name) + '</div>'
+      + '<button class="btn btn-ghost btn-sm" style="color:#b53a2e;border-color:#f0c8c4;padding:5px 10px;" onclick="handleRemove(' + p.id + ', this)">Remove</button>'
+      + '</div>';
+  }
+  el.innerHTML = html;
+}
+
+function handleRemove(id, btn) {
+  // 連打防止: ボタンを即座にdisable
+  btn.disabled = true;
+  btn.style.opacity = '0.4';
+  removePlayer(id);
+}
+
+function removePlayer(id) {
+  var idx = -1;
+  for (var i = 0; i < state.players.length; i++) {
+    if (state.players[i].id === id) { idx = i; break; }
+  }
+  if (idx === -1) return;
+  var removed = state.players[idx];
+  var name = removed.name;
+
+  if (removed.status === 'bust') {
+    for (var k = 0; k < state.players.length; k++) {
+      var q = state.players[k];
+      if (q.status === 'bust' && q.id !== id) {
+        if (q.bustPosition > 1) q.bustPosition -= 1;
+        if (q.bustTotal > 0) q.bustTotal -= 1;
+      }
+    }
+  } else {
+    for (var m = 0; m < state.players.length; m++) {
+      var r = state.players[m];
+      if (r.status === 'bust') {
+        if (r.bustPosition > 1) r.bustPosition -= 1;
+        if (r.bustTotal > 0) r.bustTotal -= 1;
+      }
+    }
+  }
+
+  state.players.splice(idx, 1);
+  saveState(); updateAll();
+  showToast(name + ' removed.');
 }
 
 /* ---- Tabs ---- */
