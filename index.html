@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,148 +16,148 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 body {
-font-family: ‘Inter’, -apple-system, BlinkMacSystemFont, sans-serif;
-background: #f0f2ee;
-color: #1a2a1c;
-min-height: 100vh;
-overflow-x: hidden;
-font-size: 14px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f0f2ee;
+  color: #1a2a1c;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 14px;
 }
 
-/* –– Header –– */
+/* ---- Header ---- */
 .header {
-background: #ffffff;
-border-bottom: 1px solid #e0e5db;
-padding: 10px 12px;
-position: sticky;
-top: 0;
-z-index: 100;
-display: flex;
-gap: 8px;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e5db;
+  padding: 10px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  gap: 8px;
 }
 
 .header-stats {
-display: flex;
-gap: 8px;
-width: 100%;
+  display: flex;
+  gap: 8px;
+  width: 100%;
 }
 
 .stat-badge {
-background: #eaf3ec;
-border: 1px solid #b8d9be;
-border-radius: 8px;
-padding: 6px 4px;
-text-align: center;
-flex: 1;
+  background: #eaf3ec;
+  border: 1px solid #b8d9be;
+  border-radius: 8px;
+  padding: 6px 4px;
+  text-align: center;
+  flex: 1;
 }
 
 .stat-badge strong {
-display: block;
-font-family: ‘Bebas Neue’, ‘Inter’, sans-serif;
-font-size: 20px;
-color: #2e7d44;
-letter-spacing: 1px;
-line-height: 1.1;
+  display: block;
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: 20px;
+  color: #2e7d44;
+  letter-spacing: 1px;
+  line-height: 1.1;
 }
 
 .stat-badge span {
-font-size: 9px;
-color: #627564;
-text-transform: uppercase;
-letter-spacing: 0.5px;
+  font-size: 9px;
+  color: #627564;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* –– Tabs –– */
+/* ---- Tabs ---- */
 .tabs {
-display: flex;
-background: #ffffff;
-border-bottom: 1px solid #e0e5db;
+  display: flex;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e5db;
 }
 
 .tab {
-flex: 1;
-padding: 11px 6px;
-font-size: 12px;
-font-weight: 700;
-color: #627564;
-text-align: center;
-cursor: pointer;
-border-bottom: 2px solid transparent;
-margin-bottom: -1px;
-text-transform: uppercase;
-letter-spacing: 0.5px;
-font-family: ‘Inter’, -apple-system, sans-serif;
+  flex: 1;
+  padding: 11px 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #627564;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
 .tab.active { color: #2e7d44; border-bottom-color: #2e7d44; }
 
-/* –– Content –– */
+/* ---- Content ---- */
 .content { padding: 14px; padding-bottom: 48px; }
 
-/* –– Card –– */
+/* ---- Card ---- */
 .card {
-background: #ffffff;
-border: 1px solid #e0e5db;
-border-radius: 12px;
-padding: 14px;
-margin-bottom: 12px;
+  background: #ffffff;
+  border: 1px solid #e0e5db;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 12px;
 }
 
 .card-title {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 2px;
-text-transform: uppercase;
-color: #627564;
-margin-bottom: 12px;
-font-family: ‘Inter’, -apple-system, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #627564;
+  margin-bottom: 12px;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
-/* –– Inputs –– */
-input[type=“text”], input[type=“number”], textarea {
-background: #f6f7f4;
-border: 1px solid #e0e5db;
-border-radius: 8px;
-color: #1a2a1c;
-font-family: ‘Inter’, -apple-system, sans-serif;
-font-size: 14px;
-padding: 10px 12px;
-outline: none;
-width: 100%;
--webkit-appearance: none;
-appearance: none;
+/* ---- Inputs ---- */
+input[type="text"], input[type="number"], textarea {
+  background: #f6f7f4;
+  border: 1px solid #e0e5db;
+  border-radius: 8px;
+  color: #1a2a1c;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14px;
+  padding: 10px 12px;
+  outline: none;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-input[type=“text”]:focus,
-input[type=“number”]:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
 textarea:focus {
-border-color: #2e7d44;
--webkit-box-shadow: 0 0 0 3px rgba(46,125,68,0.12);
-box-shadow: 0 0 0 3px rgba(46,125,68,0.12);
+  border-color: #2e7d44;
+  -webkit-box-shadow: 0 0 0 3px rgba(46,125,68,0.12);
+  box-shadow: 0 0 0 3px rgba(46,125,68,0.12);
 }
 
 .input-row { display: flex; gap: 8px; margin-bottom: 10px; }
 .input-row input { flex: 1; width: auto; }
 
-/* –– Buttons –– */
+/* ---- Buttons ---- */
 .btn {
-display: -webkit-inline-flex;
-display: inline-flex;
--webkit-align-items: center;
-align-items: center;
--webkit-justify-content: center;
-justify-content: center;
-border: none;
-border-radius: 8px;
-font-family: ‘Inter’, -apple-system, sans-serif;
-font-weight: 700;
-font-size: 13px;
-padding: 10px 16px;
-cursor: pointer;
-white-space: nowrap;
-letter-spacing: 0.2px;
--webkit-transition: opacity 0.12s;
-transition: opacity 0.12s;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  -webkit-transition: opacity 0.12s;
+  transition: opacity 0.12s;
 }
 
 .btn:active { opacity: 0.75; }
@@ -174,301 +173,299 @@ transition: opacity 0.12s;
 .btn-row { display: flex; gap: 8px; margin-bottom: 10px; }
 .btn-row .btn { flex: 1; }
 
-/* –– Section label –– */
+/* ---- Section label ---- */
 .section-label {
-font-size: 10px;
-font-weight: 700;
-letter-spacing: 1.5px;
-text-transform: uppercase;
-color: #9aab9c;
-margin-bottom: 8px;
-padding-bottom: 6px;
-border-bottom: 1px solid #e0e5db;
-font-family: ‘Inter’, -apple-system, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #9aab9c;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e0e5db;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
-/* –– Player list –– */
+/* ---- Player list ---- */
 .player-list { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 7px; }
 
 .player-item {
-background: #ffffff;
-border: 1px solid #e0e5db;
-border-radius: 10px;
-padding: 12px;
-display: -webkit-flex;
-display: flex;
--webkit-align-items: center;
-align-items: center;
-gap: 10px;
-cursor: pointer;
-position: relative;
-overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e0e5db;
+  border-radius: 10px;
+  padding: 12px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .player-item::before {
-content: ‘’;
-position: absolute;
-left: 0; top: 0; bottom: 0;
-width: 3px;
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
 }
 
 .player-item.status-active::before { background: #2e7d44; }
 .player-item.status-bust::before   { background: #e0e5db; }
 
 .player-rank {
-font-family: ‘Bebas Neue’, ‘Inter’, sans-serif;
-font-size: 17px;
-color: #9aab9c;
-min-width: 24px;
-text-align: center;
--webkit-flex-shrink: 0;
-flex-shrink: 0;
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: 17px;
+  color: #9aab9c;
+  min-width: 24px;
+  text-align: center;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .player-info { -webkit-flex: 1; flex: 1; min-width: 0; }
 
 .player-name {
-font-weight: 700;
-font-size: 14px;
-color: #1a2a1c;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1a2a1c;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .player-name.is-bust { color: #627564; }
 
 .player-sub {
-font-size: 11px;
-color: #627564;
-margin-top: 2px;
-display: -webkit-flex;
-display: flex;
--webkit-align-items: center;
-align-items: center;
--webkit-flex-wrap: wrap;
-flex-wrap: wrap;
-gap: 4px;
+  font-size: 11px;
+  color: #627564;
+  margin-top: 2px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 .ra-pill {
-display: inline-block;
-font-size: 10px;
-font-weight: 700;
-padding: 1px 6px;
-border-radius: 4px;
-background: #f1ebfa;
-color: #6b3fa0;
-border: 1px solid #c9aee8;
-letter-spacing: 0.2px;
--webkit-flex-shrink: 0;
-flex-shrink: 0;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #f1ebfa;
+  color: #6b3fa0;
+  border: 1px solid #c9aee8;
+  letter-spacing: 0.2px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .ra-pill.dim { opacity: 0.6; }
 
 .player-right {
--webkit-flex-shrink: 0;
-flex-shrink: 0;
-display: -webkit-flex;
-display: flex;
--webkit-flex-direction: column;
-flex-direction: column;
--webkit-align-items: flex-end;
-align-items: flex-end;
-gap: 3px;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+  gap: 3px;
 }
 
 .status-tag {
-font-size: 10px;
-font-weight: 700;
-padding: 2px 8px;
-border-radius: 20px;
-white-space: nowrap;
-font-family: ‘Inter’, -apple-system, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
 .tag-active { background: #eaf3ec; color: #2e7d44; border: 1px solid #b8d9be; }
 .tag-bust   { background: #f4f4f4; color: #999999; border: 1px solid #dddddd; }
 
 .bust-rank {
-font-family: ‘Bebas Neue’, ‘Inter’, sans-serif;
-font-size: 14px;
-color: #999999;
-letter-spacing: 0.5px;
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: 14px;
+  color: #999999;
+  letter-spacing: 0.5px;
 }
 
-/* –– Modal –– */
+/* ---- Modal ---- */
 .modal-overlay {
-display: none;
-position: fixed;
-top: 0; left: 0; right: 0; bottom: 0;
-background: rgba(0,0,0,0.32);
-z-index: 200;
--webkit-align-items: flex-end;
-align-items: flex-end;
--webkit-justify-content: center;
-justify-content: center;
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.32);
+  z-index: 200;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .modal-overlay.open { display: -webkit-flex; display: flex; }
 
 .modal {
-background: #ffffff;
-border-radius: 16px 16px 0 0;
-border: 1px solid #e0e5db;
-border-bottom: none;
-padding: 18px 16px 40px;
-width: 100%;
-max-height: 88vh;
-overflow-y: auto;
--webkit-overflow-scrolling: touch;
--webkit-animation: slideUp 0.22s ease;
-animation: slideUp 0.22s ease;
+  background: #ffffff;
+  border-radius: 16px 16px 0 0;
+  border: 1px solid #e0e5db;
+  border-bottom: none;
+  padding: 18px 16px 40px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-animation: slideUp 0.22s ease;
+  animation: slideUp 0.22s ease;
 }
 
 @-webkit-keyframes slideUp { from { -webkit-transform: translateY(100%); } to { -webkit-transform: translateY(0); } }
 @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
 .modal-handle {
-width: 32px; height: 4px;
-background: #e0e5db;
-border-radius: 2px;
-margin: 0 auto 14px;
+  width: 32px; height: 4px;
+  background: #e0e5db;
+  border-radius: 2px;
+  margin: 0 auto 14px;
 }
 
 .modal-player-name {
-font-family: ‘Bebas Neue’, ‘Inter’, sans-serif;
-font-size: 22px;
-letter-spacing: 2px;
-color: #1a2a1c;
-margin-bottom: 2px;
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #1a2a1c;
+  margin-bottom: 2px;
 }
 
 .modal-player-sub {
-font-size: 12px;
-color: #627564;
-margin-bottom: 16px;
+  font-size: 12px;
+  color: #627564;
+  margin-bottom: 16px;
 }
 
 hr { border: none; border-top: 1px solid #e0e5db; margin: 14px 0; }
 
-/* –– R/A counter –– */
+/* ---- R/A counter ---- */
 .ra-control {
-background: #f1ebfa;
-border: 1px solid #c9aee8;
-border-radius: 10px;
-padding: 12px 14px;
-display: -webkit-flex;
-display: flex;
--webkit-align-items: center;
-align-items: center;
--webkit-justify-content: space-between;
-justify-content: space-between;
-margin-bottom: 8px;
+  background: #f1ebfa;
+  border: 1px solid #c9aee8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-.ra-control-label { font-weight: 700; font-size: 14px; color: #6b3fa0; font-family: ‘Inter’, sans-serif; }
+.ra-control-label { font-weight: 700; font-size: 14px; color: #6b3fa0; font-family: 'Inter', sans-serif; }
 .ra-control-sub   { font-size: 11px; color: #627564; margin-top: 1px; }
 
 .ra-counter { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; gap: 10px; }
 
 .ra-btn {
-width: 32px; height: 32px;
-border-radius: 7px;
-border: 1px solid #c9aee8;
-background: #ffffff;
-color: #6b3fa0;
-font-size: 18px;
-font-weight: 700;
-cursor: pointer;
-display: -webkit-flex;
-display: flex;
--webkit-align-items: center;
-align-items: center;
--webkit-justify-content: center;
-justify-content: center;
--webkit-flex-shrink: 0;
-flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 7px;
+  border: 1px solid #c9aee8;
+  background: #ffffff;
+  color: #6b3fa0;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .ra-btn:active { background: #c9aee8; }
 
 .ra-count-display {
-font-family: ‘Bebas Neue’, ‘Inter’, sans-serif;
-font-size: 24px;
-color: #6b3fa0;
-min-width: 24px;
-text-align: center;
-letter-spacing: 1px;
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: 24px;
+  color: #6b3fa0;
+  min-width: 24px;
+  text-align: center;
+  letter-spacing: 1px;
 }
 
-/* –– Reset confirm –– */
+/* ---- Reset confirm ---- */
 .reset-confirm-box {
-display: none;
-background: #b53a2e;
-border-radius: 8px;
-padding: 12px;
-margin-top: 4px;
+  display: none;
+  background: #b53a2e;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 4px;
 }
 
 .reset-confirm-box p {
-color: #ffffff;
-font-size: 13px;
-font-weight: 600;
-margin-bottom: 10px;
-font-family: ‘Inter’, sans-serif;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
 }
 
-/* –– Toast –– */
+/* ---- Toast ---- */
 .toast {
-position: fixed;
-bottom: 72px;
-left: 50%;
--webkit-transform: translateX(-50%) translateY(120px);
-transform: translateX(-50%) translateY(120px);
-background: #1a2a1c;
-color: #ffffff;
-border-radius: 20px;
-padding: 9px 20px;
-font-size: 13px;
-font-weight: 600;
-z-index: 300;
--webkit-transition: -webkit-transform 0.28s ease;
-transition: transform 0.28s ease;
-white-space: nowrap;
-pointer-events: none;
-font-family: ‘Inter’, sans-serif;
+  position: fixed;
+  bottom: 72px;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(120px);
+  transform: translateX(-50%) translateY(120px);
+  background: #1a2a1c;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 300;
+  -webkit-transition: -webkit-transform 0.28s ease;
+  transition: transform 0.28s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: 'Inter', sans-serif;
 }
 
 .toast.show {
--webkit-transform: translateX(-50%) translateY(0);
-transform: translateX(-50%) translateY(0);
+  -webkit-transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
-/* –– Empty state –– */
+/* ---- Empty state ---- */
 .empty-state { text-align: center; padding: 40px 20px; color: #9aab9c; }
 .empty-icon {
-width: 40px; height: 40px;
-border: 2px solid #e0e5db;
-border-radius: 8px;
-margin: 0 auto 12px;
-display: -webkit-flex;
-display: flex;
--webkit-align-items: center;
-align-items: center;
--webkit-justify-content: center;
-justify-content: center;
+  width: 40px; height: 40px;
+  border: 2px solid #e0e5db;
+  border-radius: 8px;
+  margin: 0 auto 12px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 .empty-icon-inner { width: 16px; height: 16px; background: #e0e5db; border-radius: 2px; }
-.empty-state p { font-size: 13px; font-family: ‘Inter’, sans-serif; }
+.empty-state p { font-size: 13px; font-family: 'Inter', sans-serif; }
 </style>
-
 </head>
 <body>
 
 <!-- Header -->
-
 <div class="header">
   <div class="header-stats">
     <div class="stat-badge">
@@ -487,14 +484,12 @@ justify-content: center;
 </div>
 
 <!-- Tabs -->
-
 <div class="tabs">
   <div class="tab active" onclick="switchTab('players')">Players</div>
   <div class="tab" onclick="switchTab('settings')">Settings</div>
 </div>
 
 <!-- Players Tab -->
-
 <div id="tab-players" class="content">
   <div class="section-label">Players (<span id="player-count">0</span>)</div>
   <div id="player-list" class="player-list">
@@ -506,7 +501,6 @@ justify-content: center;
 </div>
 
 <!-- Settings Tab -->
-
 <div id="tab-settings" class="content" style="display:none">
   <div class="card">
     <div class="card-title">Add Player</div>
@@ -547,49 +541,44 @@ justify-content: center;
 </div>
 
 <!-- Player Modal -->
-
 <div class="modal-overlay" id="player-modal">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-player-name" id="modal-player-name"></div>
     <div class="modal-player-sub" id="modal-player-sub"></div>
 
-```
-<div class="ra-control">
-  <div>
-    <div class="ra-control-label">R/A (Rebuy / Add-on)</div>
-    <div class="ra-control-sub">Number of rebuys / add-ons</div>
-  </div>
-  <div class="ra-counter">
-    <button class="ra-btn" onclick="changeRA(-1)">−</button>
-    <div class="ra-count-display" id="ra-count-display">0</div>
-    <button class="ra-btn" onclick="changeRA(1)">+</button>
-  </div>
-</div>
+    <div class="ra-control">
+      <div>
+        <div class="ra-control-label">R/A (Rebuy / Add-on)</div>
+        <div class="ra-control-sub">Number of rebuys / add-ons</div>
+      </div>
+      <div class="ra-counter">
+        <button class="ra-btn" onclick="changeRA(-1)">−</button>
+        <div class="ra-count-display" id="ra-count-display">0</div>
+        <button class="ra-btn" onclick="changeRA(1)">+</button>
+      </div>
+    </div>
 
-<div id="modal-active-section">
-  <hr>
-  <button class="btn btn-red btn-full" onclick="bustPlayer()">Mark as Bust</button>
-</div>
+    <div id="modal-active-section">
+      <hr>
+      <button class="btn btn-red btn-full" onclick="bustPlayer()">Mark as Bust</button>
+    </div>
 
-<div id="modal-bust-section" style="display:none">
-  <hr>
-  <button class="btn btn-amber btn-full" onclick="revivePlayer()">Revive Player</button>
-</div>
+    <div id="modal-bust-section" style="display:none">
+      <hr>
+      <button class="btn btn-amber btn-full" onclick="revivePlayer()">Revive Player</button>
+    </div>
 
-<hr>
-<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9aab9c;margin-bottom:6px;font-family:'Inter',sans-serif;">Memo</div>
-<input type="number" id="modal-memo" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. chip count..." style="margin-bottom:0;" oninput="saveMemo()">
+    <hr>
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9aab9c;margin-bottom:6px;font-family:'Inter',sans-serif;">Memo</div>
+    <input type="text" id="modal-memo" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. chip count..." style="margin-bottom:0;" oninput="saveMemo()">
 
-<hr>
-<button class="btn btn-ghost btn-full" onclick="closeModal()">Close</button>
-```
-
+    <hr>
+    <button class="btn btn-ghost btn-full" onclick="closeModal()">Close</button>
   </div>
 </div>
 
 <!-- Bulk Add Modal -->
-
 <div class="modal-overlay" id="bulk-modal">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -927,11 +916,14 @@ function renderPlayers() {
     var raPills = '';
     for (var r = 0; r < (p.ra || 0); r++) raPills += '<span class="ra-pill">R/A</span>';
     var memoStr = p.memo ? '<span style="color:#9aab9c;font-size:11px;">' + escHtml(p.memo) + '</span>' : '';
+    var subExtra = (raPills || memoStr)
+      ? '&ensp;' + [raPills, memoStr].filter(function(s){return s;}).join('&ensp;')
+      : '';
     html += '<div class="player-item status-active" onclick="openPlayerModal(' + p.id + ')">'
       + '<div class="player-rank">' + (j+1) + '</div>'
       + '<div class="player-info">'
         + '<div class="player-name">' + escHtml(p.name) + '</div>'
-        + '<div class="player-sub">Active' + (raPills ? '&ensp;' + raPills : '') + (memoStr ? '&ensp;' + memoStr : '') + '</div>'
+        + '<div class="player-sub">Active' + subExtra + '</div>'
       + '</div>'
       + '<div class="player-right"><span class="status-tag tag-active">Playing</span></div>'
       + '</div>';
@@ -944,11 +936,14 @@ function renderPlayers() {
       var raPillsBust = '';
       for (var rb = 0; rb < (bp.ra || 0); rb++) raPillsBust += '<span class="ra-pill dim">R/A</span>';
       var memoStrBust = bp.memo ? '<span style="color:#b0b8b0;font-size:11px;">' + escHtml(bp.memo) + '</span>' : '';
+      var subExtraBust = (raPillsBust || memoStrBust)
+        ? '&ensp;' + [raPillsBust, memoStrBust].filter(function(s){return s;}).join('&ensp;')
+        : '';
       html += '<div class="player-item status-bust" onclick="openPlayerModal(' + bp.id + ')">'
         + '<div class="player-rank" style="color:#cccccc;font-size:12px">—</div>'
         + '<div class="player-info">'
           + '<div class="player-name is-bust">' + escHtml(bp.name) + '</div>'
-          + '<div class="player-sub">Busted' + (raPillsBust ? '&ensp;' + raPillsBust : '') + (memoStrBust ? '&ensp;' + memoStrBust : '') + '</div>'
+          + '<div class="player-sub">Busted' + subExtraBust + '</div>'
         + '</div>'
         + '<div class="player-right">'
           + '<div class="bust-rank">' + bp.bustPosition + ' / ' + (bp.bustTotal || totalPlayers()) + '</div>'
@@ -1051,6 +1046,5 @@ for (var oi = 0; oi < overlays.length; oi++) {
 
 loadState();
 </script>
-
 </body>
 </html>
