@@ -578,6 +578,10 @@ justify-content: center;
 </div>
 
 <hr>
+<div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9aab9c;margin-bottom:6px;font-family:'Inter',sans-serif;">Memo</div>
+<input type="number" id="modal-memo" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. chip count..." style="margin-bottom:0;" oninput="saveMemo()">
+
+<hr>
 <button class="btn btn-ghost btn-full" onclick="closeModal()">Close</button>
 ```
 
@@ -705,6 +709,7 @@ function openPlayerModal(id) {
     ? 'Busted — ' + p.bustPosition + ordinal(p.bustPosition) + ' place / ' + totalPlayers() + ' players'
     : 'Active';
   document.getElementById('ra-count-display').textContent = p.ra || 0;
+  document.getElementById('modal-memo').value = p.memo || '';
   document.getElementById('modal-active-section').style.display = isBust ? 'none' : '';
   document.getElementById('modal-bust-section').style.display   = isBust ? '' : 'none';
   document.getElementById('player-modal').classList.add('open');
@@ -713,6 +718,17 @@ function openPlayerModal(id) {
 function closeModal() {
   document.getElementById('player-modal').classList.remove('open');
   selectedPlayerId = null;
+}
+
+function saveMemo() {
+  if (!selectedPlayerId) return;
+  var p = null;
+  for (var i = 0; i < state.players.length; i++) {
+    if (state.players[i].id === selectedPlayerId) { p = state.players[i]; break; }
+  }
+  if (!p) return;
+  p.memo = document.getElementById('modal-memo').value;
+  saveState(); updateAll();
 }
 
 /* ---- R/A ---- */
@@ -800,16 +816,46 @@ function exportData() {
   }
   bust.sort(function(a, b){ return a.bustPosition - b.bustPosition; });
 
-  var text = '=== POKER TOURNAMENT ===\n' + new Date().toLocaleString() + '\n\n';
-  text += '[Active — ' + active.length + ' players]\n';
-  for (var j = 0; j < active.length; j++) {
-    var p = active[j];
-    text += (j+1) + '. ' + p.name + (p.ra > 0 ? ' (R/A x' + p.ra + ')' : '') + '\n';
+  var now = new Date();
+  var dateStr = now.getFullYear() + '/' + (now.getMonth()+1) + '/' + now.getDate();
+
+  var entries = 0;
+  for (var e = 0; e < state.players.length; e++) {
+    entries += 1 + (state.players[e].ra || 0);
   }
-  text += '\n[Busted — ' + bust.length + ' players]\n';
-  for (var k = 0; k < bust.length; k++) {
-    var bp = bust[k];
-    text += bp.bustPosition + '/' + total + '  ' + bp.name + (bp.ra > 0 ? ' (R/A x' + bp.ra + ')' : '') + '\n';
+
+  // R/A表示ヘルパー: 1回は(R/A)、2回以上は(R/A x2)
+  function raStr(ra) {
+    if (!ra || ra === 0) return '';
+    return ra === 1 ? ' (R/A)' : ' (R/A x' + ra + ')';
+  }
+
+  // 順位、メモ、名前、R/A の順
+  function formatLine(rank, denom, player) {
+    var memo = player.memo ? player.memo + '  ' : '';
+    return rank + '/' + denom + '  ' + memo + player.name + raStr(player.ra) + '\n';
+  }
+
+  var text = '=== POKER TOURNAMENT ===\n' + dateStr + '\n';
+
+  if (active.length === 0) {
+    text += '[' + total + ' players / ' + entries + ' Entries]\n';
+    for (var k = 0; k < bust.length; k++) {
+      var bp = bust[k];
+      text += bp.bustPosition + '/' + (bp.bustTotal || total) + '  ' + bp.name + raStr(bp.ra) + '\n';
+    }
+  } else {
+    text += '\n[Active — ' + active.length + ' players]\n';
+    for (var j = 0; j < active.length; j++) {
+      var p = active[j];
+      var memo = p.memo ? p.memo + '  ' : '';
+      text += (j+1) + '/' + total + '  ' + memo + p.name + raStr(p.ra) + '\n';
+    }
+    text += '\n[Busted — ' + bust.length + ' players]\n';
+    for (var k2 = 0; k2 < bust.length; k2++) {
+      var bp2 = bust[k2];
+      text += formatLine(bp2.bustPosition, bp2.bustTotal || total, bp2);
+    }
   }
 
   if (navigator.share) {
@@ -880,11 +926,12 @@ function renderPlayers() {
     var p = active[j];
     var raPills = '';
     for (var r = 0; r < (p.ra || 0); r++) raPills += '<span class="ra-pill">R/A</span>';
+    var memoStr = p.memo ? '<span style="color:#9aab9c;font-size:11px;">' + escHtml(p.memo) + '</span>' : '';
     html += '<div class="player-item status-active" onclick="openPlayerModal(' + p.id + ')">'
       + '<div class="player-rank">' + (j+1) + '</div>'
       + '<div class="player-info">'
         + '<div class="player-name">' + escHtml(p.name) + '</div>'
-        + '<div class="player-sub">Active' + (raPills ? '&ensp;' + raPills : '') + '</div>'
+        + '<div class="player-sub">Active' + (raPills ? '&ensp;' + raPills : '') + (memoStr ? '&ensp;' + memoStr : '') + '</div>'
       + '</div>'
       + '<div class="player-right"><span class="status-tag tag-active">Playing</span></div>'
       + '</div>';
@@ -896,11 +943,12 @@ function renderPlayers() {
       var bp = bust[k];
       var raPillsBust = '';
       for (var rb = 0; rb < (bp.ra || 0); rb++) raPillsBust += '<span class="ra-pill dim">R/A</span>';
+      var memoStrBust = bp.memo ? '<span style="color:#b0b8b0;font-size:11px;">' + escHtml(bp.memo) + '</span>' : '';
       html += '<div class="player-item status-bust" onclick="openPlayerModal(' + bp.id + ')">'
         + '<div class="player-rank" style="color:#cccccc;font-size:12px">—</div>'
         + '<div class="player-info">'
           + '<div class="player-name is-bust">' + escHtml(bp.name) + '</div>'
-          + '<div class="player-sub">Busted' + (raPillsBust ? '&ensp;' + raPillsBust : '') + '</div>'
+          + '<div class="player-sub">Busted' + (raPillsBust ? '&ensp;' + raPillsBust : '') + (memoStrBust ? '&ensp;' + memoStrBust : '') + '</div>'
         + '</div>'
         + '<div class="player-right">'
           + '<div class="bust-rank">' + bp.bustPosition + ' / ' + (bp.bustTotal || totalPlayers()) + '</div>'
