@@ -571,7 +571,7 @@ hr { border: none; border-top: 1px solid #e0e5db; margin: 14px 0; }
 
     <hr>
     <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#9aab9c;margin-bottom:6px;font-family:'Inter',sans-serif;">Memo</div>
-    <input type="text" id="modal-memo" inputmode="numeric" pattern="[0-9]*" placeholder="memo" style="margin-bottom:0;" oninput="saveMemo()">
+    <input type="text" id="modal-memo" inputmode="numeric" pattern="[0-9]*" placeholder="memo" style="margin-bottom:0;" onblur="saveMemo()">
 
     <hr>
     <button class="btn btn-ghost btn-full" onclick="closeModal()">Close</button>
